@@ -12,7 +12,15 @@ def password(request):
     lowerLetters = 'abcdefghijklmnoprstuwxyz'
     upperLetters = lowerLetters.upper()
     specialCharacters = '!@#$%^&*'
-    listAllCharacters = list(numbers + lowerLetters + upperLetters + specialCharacters)
+    listAllCharacters = list(lowerLetters)
+
+    if request.GET.get("upper"):
+        listAllCharacters += list(upperLetters)
+    if request.GET.get("specials"):
+        listAllCharacters += list(specialCharacters)
+    if request.GET.get("numbers"):
+        listAllCharacters += list(numbers)
+
     length = int(request.GET.get("length"))
     password = ''
     for _ in range(length):
